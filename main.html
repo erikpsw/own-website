@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>PSW</title>
+
+    <script src="https://use.typekit.net/kxf0iwn.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <link href="scss_styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+    <!-- Site Header -->
+    <header>
+        <nav class="site-nav">
+            <button class="site-nav-close">
+            </button>
+            <ul class="artwork01">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#tickets">Tickets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+<main>
+    <section class="hero">
+            <div class="hero-content">
+                <h2 class="hero-leadin"><span>BLOG</span></h2>
+                <h1 class="hero_title"><span>潘世维</span></h2>
+            </div>
+            <a href="#.footer-nav" class="hero-arrow">
+                <img src="images/down-arrow.png" class="hero-arrow"/>
+            </a>
+            <video autoplay loop poster="images/paintwave.jpg">
+                <source src="videos/paintwave.webm" type="video/webm; codecs=&quot;vp8,vorbis&quot;">
+            </video>
+    </section>       
+</main>
+
+<div class="page1">
+    <a class="box1">
+    </a>
+</div>
+
+<script src="js/jquery-3.1.1.min.js"></script>
+    <script>
+
+        // Site Nav
+        $(".site-nav-open").on("click", function(){
+            $(".site-nav").show();
+        });
+        $(".site-nav-close").on("click", function(){
+            $(".site-nav").hide();
+        });
+
+        // Hero Arrow
+        $(".hero-arrow").on("click", function(event){
+            event.preventDefault();
+            var introPosition = $("#intro").offset().top;
+            $('body,html').animate({
+                scrollTop: introPosition
+            }, 400);
+        });
+
+        // Scroll Events
+        $(window).on("load resize scroll", function(){
+            // Light/Dark Header
+            var bodyPosition        = $("body").scrollTop(),
+                lightSection1       = $("#intro"),
+                lightSection1Top    = lightSection1.offset().top,
+                lightSection1Bottom = lightSection1Top + lightSection1.outerHeight(),
+                lightSection2       = $(".artwork-2"),
+                lightSection2Top    = lightSection2.offset().top,
+                lightSection2Bottom = lightSection2Top + lightSection2.outerHeight(),
+                lightSection3       = $(".contact"),
+                lightSection3Top    = lightSection3.offset().top,
+                lightSection3Bottom = lightSection3Top + lightSection3.outerHeight();
+            if (
+                ( bodyPosition > lightSection1Top && bodyPosition < lightSection1Bottom ) ||
+                ( bodyPosition > lightSection2Top && bodyPosition < lightSection2Bottom ) ||
+                ( bodyPosition > lightSection3Top && bodyPosition < lightSection3Bottom )
+            ) {
+                $("header").addClass("dark");
+            } else {
+                $("header").removeClass("dark");
+            }
+            // Stamp
+            var heroBottom       = $(".hero").outerHeight(),
+                stampOffset      = $("#stamp").outerHeight() + 50;
+                stampPos         = heroBottom - stampOffset,
+                stampChangePoint = ($("#intro").offset().top + $("#intro").outerHeight()) - stampOffset;
+            if ( bodyPosition + stampPos >= stampChangePoint)   {
+                $("#stamp").removeClass("fixed").css("top", stampChangePoint);
+            } else {
+                $("#stamp").addClass("fixed").css("top", stampPos);
+            }
+        });
+    </script>
+
+
+</body>
+</html>
