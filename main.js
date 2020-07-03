@@ -15,7 +15,7 @@ ul.children[0].addEventListener('click',(e)=>{
         behavior: "smooth" 
     });
 })
-const img=document.getElementById('pic1')
+const img=document.getElementById('box1')
 
 function getElementAbsPos(e) 
 {
@@ -30,11 +30,15 @@ function getElementAbsPos(e)
     return t;
 }
 
-console.log(getElementAbsPos(img))
 ul.children[1].addEventListener('click',(e)=>{
     console.log('yes');
     window.scrollTo({ 
         top: getElementAbsPos(img),
         behavior: "smooth" 
     });
+})
+var t =screen.availHeight;
+console.log(t)
+ul.children[4].addEventListener('click',(e)=>{
+    window.scroll({top:t,behavior:'smooth'});
 })
